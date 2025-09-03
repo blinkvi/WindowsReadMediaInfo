@@ -1,5 +1,2 @@
-cmake-*
-.idea
-*.iml
-*.ipr
+/target
 thumbnail.png
