@@ -3,13 +3,27 @@ name = "mediainfo"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "mediainfo"
+crate-type = ["cdylib"]
+
 [dependencies]
 windows = { version = "0.48.0", features = [
-    "Media",
-    "Storage",
-    "Storage_Streams",
     "Media_Control",
+    "Storage_Streams",
     "Foundation"
-    
 ]}
-tokio = { version = "1.37", features = ["rt-multi-thread", "macros", "time", "rt"] }
+
+tokio = { version = "1.37", features = [
+    "rt-multi-thread",
+    "time"
+]}
+
+once_cell = "1.19"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
